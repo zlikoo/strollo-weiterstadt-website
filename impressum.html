@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum – STROLLO Weiterstadt</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { bg:'#0D0D0D',surface:'#161616',accent:'#F5C518',ink:'#F5F5F5',muted:'#6B6B6B',border:'#2A2A2A' }, fontFamily: { display:['Oswald','sans-serif'], sans:['Inter','system-ui','sans-serif'] } } } }
+  </script>
+  <style>
+    body { background: #0D0D0D; color: #F5F5F5; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    .navbar { background: #0D0D0D; border-bottom: 1px solid #2A2A2A; }
+  </style>
+</head>
+<body>
+  <header class="navbar fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 flex items-center h-16">
+      <a href="/" class="font-display font-bold text-2xl tracking-widest mr-auto">STRO<span class="text-accent">LLO</span></a>
+      <a href="/" class="text-muted text-sm hover:text-ink transition-colors uppercase tracking-wider">← Zurück</a>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 pt-32 pb-24">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="h-1 w-12 bg-accent"></div>
+      <p class="text-accent font-display font-bold text-sm tracking-widest uppercase">Rechtliches</p>
+    </div>
+    <h1 class="font-display font-bold text-6xl mb-12 tracking-wide">IMPRESSUM</h1>
+
+    <div class="space-y-10 text-ink/80 leading-relaxed">
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3 tracking-wide">Angaben gemäß § 5 TMG</h2>
+        <p>Fa. Paolo Strollo<br>Weiterstadt</p>
+      </section>
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3 tracking-wide">Kontakt</h2>
+        <p>Telefon: <a href="tel:061501865030" class="text-accent hover:text-accent/80">06150 1865030</a><br>
+        E-Mail: <a href="mailto:INFO@STROLLO.DE" class="text-accent hover:text-accent/80">INFO@STROLLO.DE</a></p>
+      </section>
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3 tracking-wide">Vertreten durch</h2>
+        <p>Paolo Strollo (Inhaber)</p>
+      </section>
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3 tracking-wide">Haftung für Inhalte</h2>
+        <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.</p>
+      </section>
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3 tracking-wide">Urheberrecht</h2>
+        <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="border-t border-border py-8">
+    <div class="max-w-3xl mx-auto px-6 flex justify-between items-center text-muted text-sm">
+      <span>© 2025 Fa. Paolo Strollo</span>
+      <a href="datenschutz.html" class="hover:text-ink transition-colors">Datenschutz</a>
+    </div>
+  </footer>
+</body>
+</html>
