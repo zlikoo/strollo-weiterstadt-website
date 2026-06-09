@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erdbau & Erdarbeiten – STROLLO Weiterstadt</title>
+  <meta name="description" content="Professionelle Erdarbeiten in Weiterstadt und der Rhein-Main-Region. Baugrubenaushub, Planierarbeiten, Entwässerung. Fa. Paolo Strollo – präzise, flexibel, zuverlässig.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#0D0D0D', surface: '#161616', accent: '#F5C518',
+            accent2: '#FFD740', ink: '#F5F5F5', muted: '#6B6B6B', border: '#2A2A2A',
+          },
+          fontFamily: {
+            display: ['Oswald', 'Impact', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #0D0D0D; color: #F5F5F5; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    .grain::after { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+    .reveal-d4 { transition-delay: 0.32s; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+    .navbar { background: #0D0D0D; border-bottom: 1px solid #2A2A2A; transition: border-color 0.3s ease; }
+    .navbar.scrolled { border-bottom-color: #F5C518; }
+    .btn-yellow { background: #F5C518; color: #0D0D0D; font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.75rem 1.5rem; display: inline-block; transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 4px 4px 0 rgba(245,197,24,0.3); }
+    .btn-yellow:hover { background: #FFD740; transform: translate(-2px, -2px); box-shadow: 6px 6px 0 rgba(245,197,24,0.4); }
+    .btn-outline { background: transparent; color: #F5F5F5; border: 2px solid #2A2A2A; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.75rem 1.5rem; display: inline-block; transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+    .btn-outline:hover { border-color: #F5C518; color: #F5C518; transform: translateY(-2px); }
+    .y-bar { display: inline-block; height: 4px; width: 48px; background: #F5C518; }
+    .ghost-text { font-family: 'Oswald', sans-serif; font-weight: 700; color: rgba(245,197,24,0.04); user-select: none; pointer-events: none; }
+    #mobile-menu { position: fixed; inset: 0; z-index: 49; background: #0D0D0D; opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity 0.3s ease, transform 0.3s ease; }
+    #mobile-menu.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .detail-card { background: #161616; border: 1px solid #2A2A2A; border-top: 3px solid transparent; transition: border-color 0.3s ease, transform 0.3s ease; position: relative; overflow: hidden; }
+    .detail-card:hover { border-top-color: #F5C518; transform: translateY(-4px); }
+    .detail-num { font-family: 'Oswald', sans-serif; font-size: 5rem; font-weight: 700; color: rgba(245,197,24,0.06); position: absolute; bottom: -0.5rem; right: 0.75rem; line-height: 1; user-select: none; transition: color 0.3s ease; }
+    .detail-card:hover .detail-num { color: rgba(245,197,24,0.12); }
+    .gal-img { overflow: hidden; position: relative; }
+    .gal-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease, filter 0.4s ease; filter: grayscale(15%); display: block; }
+    .gal-img:hover img { transform: scale(1.05); filter: grayscale(0%); }
+  </style>
+</head>
+<body>
+
+<!-- ═══ MOBILE MENU ═══ -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="flex flex-col h-full px-6 py-6 overflow-y-auto">
+    <div class="flex justify-between items-center mb-7">
+      <a href="index.html" class="font-display font-bold text-2xl tracking-widest text-ink">STRO<span class="text-accent">LLO</span></a>
+      <button id="close-menu" class="text-ink p-2" aria-label="Menü schließen">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <p class="text-accent font-display font-bold text-xs tracking-[0.3em] uppercase mb-3">Leistungen</p>
+    <nav class="flex flex-col mb-6 border border-border">
+      <a href="abbruch.html" class="mobile-link flex items-center justify-between px-5 py-4 border-b border-border text-ink hover:text-accent hover:bg-surface transition-colors">
+        <span class="font-display font-bold text-xl tracking-wide">Abbruch</span>
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+      </a>
+      <a href="erdbau.html" class="mobile-link flex items-center justify-between px-5 py-4 border-b border-border text-accent bg-surface transition-colors">
+        <span class="font-display font-bold text-xl tracking-wide">Erdbau</span>
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+      </a>
+      <a href="transporte.html" class="mobile-link flex items-center justify-between px-5 py-4 border-b border-border text-ink hover:text-accent hover:bg-surface transition-colors">
+        <span class="font-display font-bold text-xl tracking-wide">Transporte</span>
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+      </a>
+      <a href="recycling.html" class="mobile-link flex items-center justify-between px-5 py-4 text-ink hover:text-accent hover:bg-surface transition-colors">
+        <span class="font-display font-bold text-xl tracking-wide">Recycling</span>
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+      </a>
+    </nav>
+    <div class="flex gap-6 mb-6">
+      <a href="index.html#ueber-uns"    class="mobile-link text-muted hover:text-ink transition-colors font-display font-bold text-xs tracking-[0.25em] uppercase">Über uns</a>
+      <a href="index.html#recyclinghof" class="mobile-link text-muted hover:text-ink transition-colors font-display font-bold text-xs tracking-[0.25em] uppercase">Recyclinghof</a>
+      <a href="index.html#kontakt"      class="mobile-link text-muted hover:text-ink transition-colors font-display font-bold text-xs tracking-[0.25em] uppercase">Kontakt</a>
+    </div>
+    <div class="bg-surface border border-border p-4 mb-6">
+      <p class="text-accent font-display font-bold text-xs tracking-[0.3em] uppercase mb-3">Kontakt</p>
+      <a href="tel:061501865030" class="flex items-center gap-3 text-ink hover:text-accent transition-colors mb-2">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6.07 6.07l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="font-display font-bold text-sm tracking-wider">06150 1865030</span>
+      </a>
+      <p class="flex items-center gap-3 text-muted text-xs">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Weiterstadt, Hessen
+      </p>
+    </div>
+    <div class="flex flex-col gap-3">
+      <a href="index.html#kontakt" class="btn-yellow mobile-link text-center">Anfrage stellen</a>
+      <div class="flex gap-3">
+        <a href="https://www.instagram.com/strollo__erdbau/" target="_blank" rel="noopener" class="mobile-link flex-1 flex items-center justify-center gap-2 border border-border py-3 text-muted hover:border-accent hover:text-accent transition-colors">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span class="font-display font-bold text-xs tracking-wider uppercase">Instagram</span>
+        </a>
+        <a href="https://www.facebook.com/p/Fa-Paolo-Strollo-100063463931334/" target="_blank" rel="noopener" class="mobile-link flex-1 flex items-center justify-center gap-2 border border-border py-3 text-muted hover:border-accent hover:text-accent transition-colors">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span class="font-display font-bold text-xs tracking-wider uppercase">Facebook</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NAVBAR ═══ -->
+<header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 flex items-center h-16">
+    <a href="index.html" class="font-display font-bold text-2xl tracking-widest mr-auto">STRO<span class="text-accent">LLO</span></a>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-muted mr-8">
+      <a href="index.html#leistungen" class="hover:text-ink transition-colors uppercase tracking-wider text-xs">Leistungen</a>
+      <a href="index.html#ueber-uns"  class="hover:text-ink transition-colors uppercase tracking-wider text-xs">Über uns</a>
+      <a href="index.html#recyclinghof" class="hover:text-ink transition-colors uppercase tracking-wider text-xs">Recyclinghof</a>
+      <a href="index.html#kontakt"    class="hover:text-ink transition-colors uppercase tracking-wider text-xs">Kontakt</a>
+    </nav>
+    <a href="index.html#kontakt" class="btn-yellow hidden md:inline-block text-sm">Anfrage stellen</a>
+    <button id="open-menu" class="md:hidden ml-4 text-ink" aria-label="Menü öffnen">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6"  x2="19" y2="6"/>
+        <line x1="3" y1="12" x2="19" y2="12"/>
+        <line x1="3" y1="18" x2="19" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="relative h-screen min-h-[600px] flex flex-col justify-end grain overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img src="https://www.strollo-weiterstadt.de/s/cc_images/teaserbox_78540453.jpg"
+         alt="Erdbauarbeiten – Fa. Paolo Strollo"
+         class="w-full h-full object-cover"
+         loading="eager"
+         style="filter: brightness(0.25);">
+    <div class="absolute bottom-0 left-0 right-0 h-1 bg-accent z-10"></div>
+    <div class="absolute top-0 left-0 bottom-0 w-1 bg-accent z-10"></div>
+  </div>
+  <div class="relative z-10 max-w-6xl mx-auto w-full px-6 pb-20 md:pb-32 pt-28">
+    <a href="index.html" class="inline-flex items-center gap-2 text-muted hover:text-accent text-xs font-display font-bold tracking-widest uppercase transition-colors mb-10 reveal">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,19 5,12 12,5"/></svg>
+      Alle Leistungen
+    </a>
+    <div class="flex items-center gap-3 mb-6 reveal reveal-d1">
+      <div class="y-bar"></div>
+      <p class="text-accent font-display font-bold text-sm tracking-[0.3em] uppercase">Professioneller Erdbau · Weiterstadt</p>
+    </div>
+    <h1 class="font-display font-bold leading-none mb-6 reveal reveal-d2" style="font-size: clamp(3.5rem, 10vw, 9rem); letter-spacing: -0.01em;">
+      ERDE<br><span class="text-accent">BEWEGEN.</span>
+    </h1>
+    <p class="text-ink/60 text-lg md:text-xl max-w-xl mb-10 leading-relaxed reveal reveal-d3">
+      Präzise Erdarbeiten und Bodenvorbereitungen — vom Einzelhaus bis zum Gewerbegroßprojekt. Erfahrung trifft auf modernste Maschinentechnik.
+    </p>
+    <div class="flex flex-wrap gap-4 reveal reveal-d4">
+      <a href="index.html#kontakt" class="btn-yellow">Jetzt anfragen</a>
+      <a href="#leistungen" class="btn-outline">Leistungen ansehen</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<section class="bg-surface border-b border-border">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
+      <div class="py-10 px-8 reveal">
+        <div class="font-display font-bold text-5xl text-accent mb-1">Präzis</div>
+        <p class="text-muted uppercase tracking-wider font-display font-bold text-xs">Baugrubenaushub</p>
+      </div>
+      <div class="py-10 px-8 reveal reveal-d1">
+        <div class="font-display font-bold text-5xl text-ink mb-1">Flexibel</div>
+        <p class="text-muted uppercase tracking-wider font-display font-bold text-xs">Alle Projektgrößen</p>
+      </div>
+      <div class="py-10 px-8 reveal reveal-d2">
+        <div class="font-display font-bold text-5xl text-ink mb-1">Modern</div>
+        <p class="text-muted uppercase tracking-wider font-display font-bold text-xs">Maschinenpark</p>
+      </div>
+      <div class="py-10 px-8 reveal reveal-d3">
+        <div class="font-display font-bold text-5xl text-ink mb-1">35+</div>
+        <p class="text-muted uppercase tracking-wider font-display font-bold text-xs">Jahre Erfahrung</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LEISTUNGSDETAILS ═══ -->
+<section id="leistungen" class="py-24 md:py-32">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-16 reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="y-bar"></div>
+        <p class="text-accent font-display font-bold text-sm tracking-[0.25em] uppercase">Was wir tun</p>
+      </div>
+      <h2 class="font-display font-bold leading-none" style="font-size: clamp(3rem, 8vw, 7rem);">ERDBAU-<br>LEISTUNGEN</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <div class="detail-card p-7 reveal reveal-d1">
+        <div class="detail-num">01</div>
+        <div class="relative z-10">
+          <div class="mb-5 w-12 h-12 flex items-center justify-center bg-accent/10 border border-accent/20">
+            <svg width="24" height="24" fill="none" stroke="#F5C518" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.03a1 1 0 0 0 1.68 1.08c2.43-3.88 4.5-7.11 12.5-9.11"/><path d="M17 8l1-4"/><path d="M15.6 7.6a.5.5 0 0 0 .8 0L18 6l-2-2-1.6 2.13a.5.5 0 0 0 0 .73z"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Rodungsarbeiten</h3>
+          <p class="text-muted text-sm leading-relaxed">Fachgerechte Rodung von Bäumen, Sträuchern und Wurzelwerk — Vorbereitung für anschließende Erdarbeiten.</p>
+        </div>
+      </div>
+
+      <div class="detail-card p-7 reveal reveal-d2">
+        <div class="detail-num">02</div>
+        <div class="relative z-10">
+          <div class="mb-5 w-12 h-12 flex items-center justify-center bg-accent/10 border border-accent/20">
+            <svg width="24" height="24" fill="none" stroke="#F5C518" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22,8.5 12,15.5 2,8.5"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Baugruben&shy;aushub</h3>
+          <p class="text-muted text-sm leading-relaxed">Präziser Aushub von Baugruben jeder Tiefe und Größe — mit fachgerechter Abstützung und Sicherung.</p>
+        </div>
+      </div>
+
+      <div class="detail-card p-7 reveal reveal-d3">
+        <div class="detail-num">03</div>
+        <div class="relative z-10">
+          <div class="mb-5 w-12 h-12 flex items-center justify-center bg-accent/10 border border-accent/20">
+            <svg width="24" height="24" fill="none" stroke="#F5C518" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 17l3-3 4 4 4-8 4 5"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Gelände&shy;auffüllung</h3>
+          <p class="text-muted text-sm leading-relaxed">Fachgerechte Auffüllung und Verdichtung von Geländen — mit geeignetem Material für dauerhafte Stabilität.</p>
+        </div>
+      </div>
+
+      <div class="detail-card p-7 reveal reveal-d1">
+        <div class="detail-num">04</div>
+        <div class="relative z-10">
+          <div class="mb-5 w-12 h-12 flex items-center justify-center bg-accent/10 border border-accent/20">
+            <svg width="24" height="24" fill="none" stroke="#F5C518" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Planierarbeiten</h3>
+          <p class="text-muted text-sm leading-relaxed">Exaktes Planieren von Bauflächen und Geländen — Grundlage für jede weitere Bau- oder Pflasterarbeit.</p>
+        </div>
+      </div>
+
+      <div class="detail-card p-7 reveal reveal-d2">
+        <div class="detail-num">05</div>
+        <div class="relative z-10">
+          <div class="mb-5 w-12 h-12 flex items-center justify-center bg-accent/10 border border-accent/20">
+            <svg width="24" height="24" fill="none" stroke="#F5C518" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Verbauarbeiten</h3>
+          <p class="text-muted text-sm leading-relaxed">Temporäre und permanente Verbaumaßnahmen zur Sicherung von Böschungen, Gräben und Baugruben.</p>
+        </div>
+      </div>
+
+      <div class="detail-card p-7 reveal reveal-d3">
+        <div class="detail-num">06</div>
+        <div class="relative z-10">
+          <div class="mb-5 w-12 h-12 flex items-center justify-center bg-accent/10 border border-accent/20">
+            <svg width="24" height="24" fill="none" stroke="#F5C518" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-4.03-9-9v-1l9-4 9 4v1c0 4.97-4.03 9-9 9z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Entwässerungs&shy;arbeiten</h3>
+          <p class="text-muted text-sm leading-relaxed">Professionelle Drainagelösungen und Entwässerungssysteme — für dauerhaft trockene und stabile Flächen.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALERIE ═══ -->
+<section class="py-24 bg-surface border-y border-border">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-12 reveal">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="y-bar"></div>
+        <p class="text-accent font-display font-bold text-sm tracking-[0.25em] uppercase">Einblicke</p>
+      </div>
+      <h2 class="font-display font-bold text-5xl md:text-6xl leading-none">ERDBAU<br>IN AKTION</h2>
+    </div>
+    <!-- 3-column equal grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 reveal reveal-d1">
+      <div class="gal-img" style="height: 320px;">
+        <img src="https://www.strollo-weiterstadt.de/s/cc_images/teaserbox_78540462.jpg"
+             alt="Baggerarbeiten Erdbau – Strollo" loading="lazy">
+      </div>
+      <div class="gal-img" style="height: 320px;">
+        <img src="https://www.strollo-weiterstadt.de/s/cc_images/teaserbox_78540463.jpg"
+             alt="Baugrubenarbeiten – Fa. Paolo Strollo" loading="lazy">
+      </div>
+      <div class="gal-img" style="height: 320px;">
+        <img src="https://www.strollo-weiterstadt.de/s/cc_images/teaserbox_78540451.jpg"
+             alt="Erdarbeiten Rhein-Main" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="py-24 md:py-32 relative overflow-hidden">
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+    <span class="ghost-text" style="font-size: clamp(6rem, 22vw, 18rem);">STROLLO</span>
+  </div>
+  <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
+    <div class="flex items-center justify-center gap-3 mb-6 reveal">
+      <div class="y-bar"></div>
+      <p class="text-accent font-display font-bold text-sm tracking-[0.3em] uppercase">Projekt planen?</p>
+      <div class="y-bar"></div>
+    </div>
+    <h2 class="font-display font-bold leading-none mb-6 reveal reveal-d1" style="font-size: clamp(2.5rem, 7vw, 6rem);">
+      GEMEINSAM<br>ANS WERK.
+    </h2>
+    <p class="text-ink/50 text-lg max-w-lg mx-auto mb-10 leading-relaxed reveal reveal-d2">
+      Unverbindliche Anfrage stellen — wir melden uns innerhalb von 24 Stunden.
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center reveal reveal-d3">
+      <a href="index.html#kontakt" class="btn-yellow">Jetzt anfragen</a>
+      <a href="tel:061501865030" class="btn-outline">06150 1865030</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="border-t border-border py-12 overflow-hidden relative">
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+    <span class="ghost-text" style="font-size: clamp(6rem, 20vw, 16rem); letter-spacing: -0.02em;">STROLLO</span>
+  </div>
+  <div class="relative z-10 max-w-6xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <p class="font-display font-bold text-2xl tracking-widest mb-1">STRO<span class="text-accent">LLO</span></p>
+        <p class="text-muted text-xs">Fa. Paolo Strollo · Weiterstadt</p>
+      </div>
+      <div class="flex items-center gap-6 text-sm text-muted">
+        <a href="impressum.html"   class="hover:text-ink transition-colors">Impressum</a>
+        <a href="datenschutz.html" class="hover:text-ink transition-colors">Datenschutz</a>
+        <span>© 2025 Fa. Paolo Strollo</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    var nav = document.getElementById('navbar');
+    window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 80); }, { passive: true });
+  })();
+  (function() {
+    var menu = document.getElementById('mobile-menu');
+    var openBtn = document.getElementById('open-menu');
+    var closeBtn = document.getElementById('close-menu');
+    var links = document.querySelectorAll('.mobile-link');
+    function open()  { menu.classList.add('open'); menu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function close() { menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    openBtn.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    links.forEach(function(l){ l.addEventListener('click', close); });
+  })();
+  (function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
